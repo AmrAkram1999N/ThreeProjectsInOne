@@ -39,7 +39,6 @@ class MainController extends Controller
     }
     public function userDashBoard()
     {
-
         $user = Auth::guard('web')->user();
         $servicesAccount = $user->Services;
         return view('ProjectNew.user_dashboard',[
@@ -126,9 +125,19 @@ class MainController extends Controller
     public function cardView($lang = 'en')
     {
         $language = $this->lang($lang);
-        return view('ProjectFiles.Auth.Account.cardView', [
+        $line = Auth::guard('account')->check();
+        if($line == true)
+        {
+            $link = route('Chain.Account.Auth.accountProfile');
+        }else
+        {
+            $link = route('Chain.User.Auth.userProfile');
+        }
+
+        return view('ProjectNew.cardView', [
             'number' => 1,
             'lang' => $language,
+            'linepage' => $link,
         ]);
     }
 

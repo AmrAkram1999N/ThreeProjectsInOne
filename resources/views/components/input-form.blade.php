@@ -10,7 +10,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark">
-                <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Upload a new photo</h5>
+                <h5 class="modal-title text-white" id="exampleModalToggleLabel">Upload a new photo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

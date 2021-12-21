@@ -37,7 +37,7 @@ class FortifyServiceProvider extends ServiceProvider
         {
             Config::set('fortify.guard','web');
             Config::set('fortify.prefix','Chain/User');
-            Config::set('fortify.home','Chain/User/Auth/userDashboard');
+            Config::set('fortify.home','Chain/User/Auth/userDashBoard');
             Config::set('fortify.username', 'email');
         }
     }
@@ -89,8 +89,8 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::viewPrefix('auth.');
-        Fortify::loginView('auth.login');
-        Fortify::registerView('auth.register');
-        Fortify::requestPasswordResetLinkView('auth.forgot-password');
+        // Fortify::loginView('auth.login');
+        // Fortify::registerView('auth.register');
+        // Fortify::requestPasswordResetLinkView('auth.forgot-password');
     }
 }

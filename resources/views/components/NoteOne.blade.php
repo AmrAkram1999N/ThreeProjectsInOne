@@ -27,7 +27,7 @@
                 <hr style="height:3px;border:none;color:rgb(158, 1, 1);background-color:rgb(167, 4, 4);" />
                 <p>
                     {{ $paragraphTwo }}                </p>
-                <a target="_blank" href="{{ route('Chain.Public.databaseSystem') }}">{{ $link }}
+                <a target="_blank" href="{{ route('databaseSystem') }}">{{ $link }}
                 </a>
              </div>
          </div>

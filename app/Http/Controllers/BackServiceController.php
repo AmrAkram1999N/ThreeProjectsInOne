@@ -15,10 +15,20 @@ class BackServiceController extends Controller
     use HttpRequest;
     use TelegramComponents;
     protected $lang;
+    protected $link;
 
     public function __construct()
     {
         $this->lang = $this->lang();
+
+        $line = Auth::guard('account')->check();
+        if($line == true)
+        {
+            $this->link = route('Chain.Account.Auth.accountProfile');
+        }else
+        {
+            $this->link = route('Chain.User.Auth.userProfile');
+        }
     }
 
     // public function BankServiceWebhook()
@@ -69,7 +79,7 @@ class BackServiceController extends Controller
 
                 session()->put('time',$time);
 
-                return view('ProjectFiles.Auth.Account.cardView', ['number' => $cardModel->clientnumber, 'lang' => $this->lang,]);
+                return view('ProjectNew.cardView', ['number' => $cardModel->clientnumber, 'lang' => $this->lang, 'linepage' => $this->link,]);
             } else {
                 $num = $cardModel->id + 1;
 
@@ -82,7 +92,7 @@ class BackServiceController extends Controller
 
                 session()->put('time',$time);
 
-                return view('ProjectFiles.Auth.Account.cardView', ['number' => $cardModel->clientnumber,'lang' => $this->lang,]);
+                return view('ProjectNew.cardView', ['number' => $cardModel->clientnumber,'lang' => $this->lang,'linepage' => $this->link,]);
             }
 
         } else {
@@ -102,7 +112,7 @@ class BackServiceController extends Controller
 
                 session()->put('time',$time);
 
-                return view('ProjectFiles.Auth.Account.cardView', ['number' => $cardModel->clientnumber, 'lang' => $this->lang,]);
+                return view('ProjectNew.cardView', ['number' => $cardModel->clientnumber, 'lang' => $this->lang,'linepage' => $this->link,]);
             } else {
                 $num = $cardModel->id + 1;
 
@@ -116,7 +126,7 @@ class BackServiceController extends Controller
 
                 session()->put('time',$time);
 
-                return view('ProjectFiles.Auth.Account.cardView', ['number' => $cardModel->clientnumber,'lang' => $this->lang,]);
+                return view('ProjectNew.cardView', ['number' => $cardModel->clientnumber,'lang' => $this->lang,'linepage' => $this->link,]);
             }
         }
 
@@ -130,10 +140,10 @@ class BackServiceController extends Controller
 
         if($moreThan == null)
         {
-            return redirect()->route('Chain.Public.cardView')->with('number',"There is nobody before you!!");
+            return redirect()->route('cardView')->with('number',"There is nobody before you!!");
         }else
         {
-            return view('ProjectFiles.Auth.Account.cardView',['number' => $moreThan->clientnumber,'lang' => $this->lang,]);
+            return view('ProjectNew.cardView',['number' => $moreThan->clientnumber,'lang' => $this->lang,'linepage' => $this->link,]);
         }
     }
 
@@ -143,10 +153,10 @@ class BackServiceController extends Controller
 
         if($moreThan == null)
         {
-            return redirect()->route('Chain.Public.cardView')->with('number',"There is nobody after you!!");
+            return redirect()->route('cardView')->with('number',"There is nobody after you!!");
         }else
         {
-            return view('ProjectFiles.Auth.Account.cardView',['number' => $moreThan->clientnumber,'lang' => $this->lang,]);
+            return view('ProjectNew.cardView',['number' => $moreThan->clientnumber,'lang' => $this->lang,'linepage' => $this->link,]);
         }
     }
 
@@ -172,13 +182,13 @@ class BackServiceController extends Controller
 
         if($modelCard == null)
         {
-            return redirect()->route('Chain.Account.Auth.Back_Cards_Service')->with('status',"There is no clients at this moment!! wait a little please ^_^");
+            return redirect()->route('Chain.Account.Auth.bankCardService')->with('status',"There is no clients at this moment!! wait a little please ^_^");
         }
         session()->put('ClientNumber',$modelCard->clientnumber);
 
         $modelCard->delete();
 
-        return redirect()->route('Chain.Account.Auth.Back_Cards_Service');
+        return redirect()->route('Chain.Account.Auth.bankCardService');
     }
 
 

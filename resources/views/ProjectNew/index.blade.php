@@ -49,7 +49,8 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="{{ route('home') }}">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Dashboard</a></li>
+          @if(Auth::check())
+                  <li><a class="nav-link scrollto" href="#about">Dashboard</a></li>@endif
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="{{ $linepage }}">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
@@ -107,22 +108,27 @@
           </li>
 
           {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}
-          @if(Auth::check()) <li>
+          @if (Auth::check())
+          <li><li>
               <form action="{{ route('logout') }}" method="POST">
               @csrf
-                <button type="submit">Sing Out</button>
+                <button type="submit" class="get-started-btn scrollto bg-danger ms-3">Sing Out</button>
             </form></li> @else
-          <li class="dropdown"><a href="#"><span>Register or Login</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a target="_blank" href="{{ route('register') }}">Register</a></li>
-              <li class="dropdown"><a  href="#"><span>Login</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a target="_blank" href="{{ url('Chain/User/login')}}">Login as a user</a></li>
-                  <li><a target="_blank" href="{{ url('Chain/Account/login')}}">Login as an account</a></li>
-                </ul>
+              <li class="dropdown"><a href="#"><span>Register or Login</span> <i
+                          class="bi bi-chevron-down"></i></a>
+                  <ul>
+                      <li><a target="_blank" href="{{ route('register') }}">Register</a></li>
+                      <li class="dropdown"><a href="#"><span>Login</span> <i
+                                  class="bi bi-chevron-right"></i></a>
+                          <ul>
+                              <li><a target="_blank" href="{{ url('Chain/User/login') }}">Login as a
+                                      user</a></li>
+                              <li><a target="_blank" href="{{ url('Chain/Account/login') }}">Login as an
+                                      account</a></li>
+                          </ul>
+                      </li>
+                  </ul>
               </li>
-            </ul>
-          </li>
           @endif
 
         </ul>
@@ -155,7 +161,7 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a target="_blank" href="{{ route('Chain.Account.Auth.bankCardService') }}">Bank Service</a></h3>
+            <h3><a target="_blank" href="{{ route('cardView') }}">Bank Service</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
@@ -265,7 +271,7 @@
 
       </div>
     </section><!-- End Features Section -->
-
+--}}
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container" data-aos="fade-up">
@@ -278,31 +284,31 @@
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Short Links</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4><a href="{{ route('Chain.Account.Auth.shortLinkService') }}">Short Links Service</a></h4>
+              <p>Short and cur your links with this beautiful tool</p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <h4><a href="{{ route('Chain.Account.Auth.fileManagerService') }}">File Manager Service</a></h4>
+              <p>Manager your files and folders with our easy system </p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <div class="icon"><i class="bx bx-arch"></i></div>
+              <h4><a href="{{ route('cardView') }}">Bank Card Service</a></h4>
+              <p>Take your turn on the line in the bank from your home</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+          {{-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
               <h4><a href="">Nemo Enim</a></h4>
               <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
             </div>
@@ -318,17 +324,17 @@
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Magni Dolores</a></h4>
               <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
             </div>
-          </div>
+          </div> --}}
 
         </div>
 
       </div>
     </section><!-- End Services Section -->
-
+{{--
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
@@ -864,7 +870,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="5assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>

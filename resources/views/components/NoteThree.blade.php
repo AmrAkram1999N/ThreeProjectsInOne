@@ -34,7 +34,7 @@
 
                 <p>{{ $paragraphTwo }}</p>
 
-                <a target="_blank" href="{{route('Chain.Public.controllerModelSystem')}}">{{ $link }}
+                <a target="_blank" href="{{route('controllerModelSystem')}}">{{ $link }}
                 </a>
 
             </div>

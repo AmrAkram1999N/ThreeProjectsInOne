@@ -34,6 +34,27 @@ if (request()->is('Chain/Account/*')) {
 Route::get('/home', [MainController::class, 'home'])->name('home');
 Route::get('/BT{id}', [ShortLinkController::class, 'Redirect_Short_Link'])->name('Redirect_Short_Link');
 
+//Bank card
+Route::get('/cardView',[MainController::class,'cardView'])->name('cardView');
+
+//lang
+Route::get('/cardView/{lang}', [MainController::class,'cardView'])->name('langChoice');
+
+//process
+Route::post('/getNumber',[BackServiceController::class,'getNumber'])->name('getNumber');
+Route::post('/previousNumber/{number}', [BackServiceController::class,'previousNumber'])->name('previousNumber');
+Route::post('/nextNumber/{number}', [BackServiceController::class,'nextNumber'])->name('nextNumber');
+
+//Projetc System
+Route::get('/databaseSystem', [MainController::class, 'databaseSystem'])->name('databaseSystem');
+Route::get('/interfaceSystem', [MainController::class, 'interfaceSystem'])->name('interfaceSystem');
+Route::get('/controllerModelSystem', [MainController::class, 'controllerModelSystem'])->name('controllerModelSystem');
+
+
+
+
+
+
 
 
 Route::group([ 'prefix' => 'Chain/User', 'as' => 'Chain.User.'], function () {
@@ -91,23 +112,6 @@ Route::group([ 'prefix' => 'Chain/Account', 'as' => 'Chain.Account.'], function 
 });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
